@@ -44,8 +44,16 @@ async function run() {
         const productsData = client.db("SianBoutique").collection("products")
         const cartsData = client.db("SianBoutique").collection("carts")
 
+        app.get('/products', async (req, res) => {
+            const result = await productsData.find().toArray();
+            res.send(result)
+        })
+        app.get('/featured', async (req, res) => {
+            const result = (await productsData.find().toArray()).slice(0, 5);
+            res.send(result)
+        })
 
-        
+
 
 
 
