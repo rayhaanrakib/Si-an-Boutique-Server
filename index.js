@@ -58,6 +58,17 @@ async function run() {
             res.send(result);
 
         })
+        app.get('/cart_products/', async (req, res) => {
+            if (req.user.email != req.query.email) {
+                return res.status(403).send({ message: 'forbidden access' })
+            }
+            let query = {};
+            if (req.query?.email) {
+                query = { userEmail: req.query.email }
+            }
+            const result = await cartsData.find(query).toArray();
+            res.send(result);
+        })
 
 
 
