@@ -52,6 +52,12 @@ async function run() {
             const result = (await productsData.find().toArray()).slice(0, 5);
             res.send(result)
         })
+        app.post('/cart_products', async (req, res) => {
+            const cartProduct = req.body;
+            const result = await cartsData.insertOne(cartProduct);
+            res.send(result);
+
+        })
 
 
 
